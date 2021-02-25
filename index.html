@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Fullscreen Overlay Responsive Navigation Menu</title>
+		<link rel="stylesheet" href="styles.css" />
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="menu-close">
+				<div class="menu-close-img"><img src="close-icon.png" alt="" /></div>
+			</div>
+			<div class="hr"></div>
+			<div class="menu">
+				<div class="menu-left">
+					<div class="menu-links">
+						<div class="menu-link">
+							<a href="#">Home <span>01</span></a>
+						</div>
+						<div class="menu-link">
+							<a href="#">Shop <span>02</span></a>
+						</div>
+						<div class="menu-link">
+							<a href="#">The Book <span>03</span></a>
+						</div>
+						<div class="menu-link">
+							<a href="#">Contact <span>04</span></a>
+						</div>
+					</div>
+				</div>
+				<div class="menu-right">
+					<div class="contact">
+						<div class="mail">
+							<div><span class="title">Contact</span><br /><br /></div>
+							<div><span class="info">codegridweb@gmail.com</span><br /></div>
+						</div>
+						<div class="socials">
+							<div><span class="title">Follow Us</span><br /><br /></div>
+							<div><span class="info">Instagram</span><br /><br /></div>
+							<div><span class="info">Facebook</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="menu-open">menu</div>
+		<script>
+			tl = new TimelineMax({ paused: true });
+
+			tl.to(".menu-left", 1, {
+				left: 0,
+				ease: Expo.easeInOut,
+			});
+
+			tl.to(
+				".menu-right",
+				1,
+				{
+					right: 0,
+					ease: Expo.easeInOut,
+				},
+				"-=1"
+			);
+
+			tl.staggerFrom(
+				".menu-links > div",
+				0.8,
+				{
+					y: 100,
+					opacity: 0,
+					ease: Expo.easeOut,
+				},
+				"0.1",
+				"-=0.4"
+			);
+
+			tl.staggerFrom(
+				".mail > div, .socials > div",
+				0.8,
+				{
+					y: 100,
+					opacity: 0,
+					ease: Expo.easeOut,
+				},
+				"0.1",
+				"-=1"
+			);
+
+			tl.from(
+				".menu-close",
+				1,
+				{
+					scale: 0,
+					opacity: 1,
+					ease: Expo.easeInOut,
+				},
+				"-=1"
+			);
+
+			tl.to(
+				".hr",
+				0.4,
+				{
+					scaleY: 1,
+					transformOrigin: "0% 50%",
+					ease: Power2.ease,
+				},
+				"-=2"
+			);
+
+			tl.reverse();
+			$(document).on("click", ".menu-open", function () {
+				tl.reversed(!tl.reversed());
+			});
+			$(document).on("click", ".menu-close", function () {
+				tl.reversed(!tl.reversed());
+			});
+		</script>
+	</body>
+</html>
